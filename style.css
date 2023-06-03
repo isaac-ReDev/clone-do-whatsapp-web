@@ -304,4 +304,7 @@ body{
     font-size: 12px;
     opacity: 0.5;
 }
+.hidden{
+    display: none;
+}
 /*? end helpers */

@@ -1,4 +1,5 @@
 
+const inputSearcContacts = document.querySelector("#search-friends")
 const contactList = document.querySelector(".contact-list")
 const conversationsList = document.querySelector(".conversations-list")
 const arrContacts = [
@@ -84,11 +85,11 @@ const arrContacts = [
     }
 ]
 
-function settings(){
+function settings(str){
     const friendbarInfo = document.querySelector("#friend-bar-img")    
-    friendbarInfo.style.display = "none"
+    friendbarInfo.style.display = str
 }
-settings();
+settings("none");
 
 function switchChatOnClick(index){
     const friendName = document.querySelector(".friend-name")
@@ -100,12 +101,7 @@ function switchChatOnClick(index){
     friendName.innerHTML = name
     imgFriendBar.src = img
 
-    // for(let you=0; you<yourConversations.length; you++){
-    //     console.log(yourConversations[you])
-    //     for(let friend=0; friend<friendConversations.length; friend++){
-    //         console.log(friendConversations[friend])
-    //     }
-    // }
+    settings("block")
 
     conversationsList.innerHTML = "";
     
@@ -133,33 +129,6 @@ function switchChatOnClick(index){
 
 
 for(let i=0; i<arrContacts.length;i++){
-    // contactList.innerHTML += `
-    //     <li data-id="contact" class="contact cursor-pointer">
-    //         <span class="contact-img-box center">
-    //             <img class="img" src="https://i0.wp.com/film-bunker.com/wp-content/uploads/2019/11/https___hypebeast.com_image_2019_09_dr-stone-documentary-hypebeast-exclusive-clip-00.jpg?fit=900%2C600&ssl=1"alt="contact-image">
-    //         </span>
-    //         <span class="contact-information">
-    //             <div class="top">
-    //                 <span class="contact-name">bilogssia</span>
-    //                 <span class="data">26/05/2023</span>
-    //             </div> 
-    //             <div class="bottom">
-    //                 <ion-icon class="visualized" name="checkmark-done-sharp"></ion-icon>
-    //                 <span class="last-msg">Voce: Como vai ?</span>
-    //                 <ion-icon class="fixed" name="chevron-down-sharp"></ion-icon>
-    //             </div>
-    //         </span>
-    //     </li> 
-    // `
-    // contactList.addEventListener("click", (e)=>{
-    //     const eventTarget = e.target;
-    //     if(eventTarget.childNodes){
-    //         console.log(eventTarget.parentNode)
-    //     }
-    //     // if(eventTarget.tagName === "IMG"){
-    //     //     console.log(eventTarget)
-    //     // }
-    // })
     const newContact = document.createElement("li");
     const contBox = document.createElement("span")
     const contInformation = document.createElement("span")
@@ -206,8 +175,6 @@ for(let i=0; i<arrContacts.length;i++){
     divContInfoBottom.append(fixed)
     contInformation.append(divContInfoBottom)
 
-    
-
     contactList.append(newContact)
     
 }
@@ -215,9 +182,22 @@ const contacts    = document.querySelectorAll(".contact")
 
 contacts.forEach(ele => {
     ele.addEventListener("click", (e)=>{
-        const eventTarget = e.target;
         const contactndex = ele.getAttribute("id");
         switchChatOnClick(contactndex)
         
     })
+})
+
+inputSearcContacts.addEventListener("input", (e)=> {
+    const str = e.target.value.trim()
+    Array.from(contactList.children) 
+        .filter(conts => !conts.textContent.includes(str))
+        .forEach(conts => {
+            conts.classList.add("hidden")
+        })
+    Array.from(contactList.children) 
+        .filter(conts => conts.textContent.includes(str))
+        .forEach(conts => {
+            conts.classList.remove("hidden")
+        })      
 })
