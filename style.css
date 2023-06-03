@@ -145,7 +145,7 @@ body{
     height: 80px;
     margin-top: 2px;
     margin-bottom: 2px;
-    background-color: var(--light-bg-color);
+    background-color: red;
 }
 .contact:hover{
     background-color: var(--light-bg-gray);
@@ -175,7 +175,7 @@ body{
     opacity: 0.5;
 }
 .fixed{    
-    position: relative;
+    position: relative; 
     left: 150px;    
 }
 .contact-name{
