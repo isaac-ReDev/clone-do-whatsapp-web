@@ -126,6 +126,7 @@ body{
     width: 40px;
     height: 40px;
     border-radius: 100%;
+    cursor: pointer;
 }
 .contact-list{    
     width: 100%;
@@ -145,7 +146,7 @@ body{
     height: 80px;
     margin-top: 2px;
     margin-bottom: 2px;
-    background-color: red;
+    background-color: var(--light-bg-color);
 }
 .contact:hover{
     background-color: var(--light-bg-gray);
@@ -173,10 +174,11 @@ body{
 .last-msg{
     margin-left: 10px;
     opacity: 0.5;
+    width: 80%;
 }
 .fixed{    
-    position: relative; 
-    left: 150px;    
+    padding-left: 10px;
+    
 }
 .contact-name{
 
