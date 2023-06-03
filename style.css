@@ -128,7 +128,7 @@ body{
     border-radius: 100%;
     cursor: pointer;
 }
-.contact-list{    
+.contact-list{     
     width: 100%;
     height: 85vh;
     overflow: auto;
@@ -224,8 +224,6 @@ body{
 }
 .bottom-search-bar > span{
     background-color: rebeccapurple;
-    /* margin-left:10px;
-    margin-right: 10px; */
 }
 .bottom-search-bar > input{
     width: 80%;
@@ -254,9 +252,6 @@ body{
     padding-top: 5px;
     padding-bottom: 5px;
 }
-.your-conversation{
-    /* padding-right: 40px; */
-}
 .your-msg{
     background-color: var(--light-green);
 }
@@ -267,9 +262,6 @@ body{
     justify-content: flex-start;
     margin-top: 5px;
     margin-bottom: 5px;
-}
-.another-conversation{
-    /* padding-right: 40px; */
 }
 .another-msg{
     background-color: var(--light-bg-color);

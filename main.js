@@ -188,16 +188,23 @@ contacts.forEach(ele => {
     })
 })
 
-inputSearcContacts.addEventListener("input", (e)=> {
-    const str = e.target.value.trim()
-    Array.from(contactList.children) 
-        .filter(conts => !conts.textContent.includes(str))
+const hideContacts = (list, str)=>{
+    list
+        .filter(conts => !conts.textContent.toLowerCase().includes(str))
         .forEach(conts => {
             conts.classList.add("hidden")
         })
-    Array.from(contactList.children) 
-        .filter(conts => conts.textContent.includes(str))
+}
+const showContacts = (list, str)=>{
+    list
+        .filter(conts => conts.textContent.toLowerCase().includes(str))
         .forEach(conts => {
             conts.classList.remove("hidden")
-        })      
+        })
+}
+inputSearcContacts.addEventListener("input", (e)=> {
+    const str = e.target.value.trim().toLowerCase()    
+    const newContactList = Array.from(contactList.children)
+    hideContacts(newContactList, str)
+    showContacts(newContactList, str)
 })
