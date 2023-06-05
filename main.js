@@ -9,9 +9,11 @@ const arrContacts = [
         date:'26/02023',
         lastMsg:"bem",
         conversations:[
-            ["opa", "como vai ?"],
-            ["Eae", "bem"]
-        ]   
+            {owner:false, msg:"Opa"},
+            {owner:false, msg:"Como vai ?"},
+            {owner:true, msg:"Eae"},
+            {owner:true, msg:"Bem"}
+        ]
     },
     {
         img:'https://i0.wp.com/metagalaxia.com.br/wp-content/uploads/2022/05/luffy-one-piece.webp?fit=1200%2C675&ssl=1',
@@ -19,9 +21,10 @@ const arrContacts = [
         date:'ontem',
         lastMsg:"So se for agora",
         conversations:[
-            ["Venha", "Vamos procurar o One Piece"],
-            ["So se for agora"]
-        ]   
+            {owner:false, msg:"Venha"},
+            {owner:false, msg:"Vamos procurar o one Piece"},
+            {owner:true, msg:"So se for agora"},
+        ]
     },
     {
         img:'https://criticalhits.com.br/wp-content/uploads/2022/05/naruto-modo-sabio.jpg',
@@ -29,9 +32,9 @@ const arrContacts = [
         date:'sexta-feira',
         lastMsg:"Onde fica isso ai ?",
         conversations:[
-            ["Venha para Konohagakure"],
-            ["Onde fica isso ai ?"]
-        ]   
+            {owner:false, msg:"Venha para Konohagakure"},
+            {owner:true, msg:"Onde fica isso ai ?"},
+        ]
     },
     {
         img:'https://dimensaosete.com.br/static/70b47d9b78c88d436346b91e639b0357/a6104/zoro.webp',
@@ -39,8 +42,8 @@ const arrContacts = [
         date:'10:10',
         lastMsg:"Esta perdido novamente ?",
         conversations:[
-            ["Para onde foi o luffy ?"],
-            ["Esta perdido novamente ?"]
+            {owner:false, msg:"Para onde foi o Luffy ?"},
+            {owner:true, msg:"Esta perdido novamente ?"},
         ]
     },
     {
@@ -49,8 +52,8 @@ const arrContacts = [
         date:'8:15',
         lastMsg:"E so marcar o dia, cara",
         conversations:[
-            ["Quando iremos treinar ?"],
-            ["E so marcar o dia, cara"]
+            {owner:false, msg:"Quando iremos treinar ?"},
+            {owner:true, msg:"E so marcar o dia, cara"},
         ]
     },
     {
@@ -59,8 +62,8 @@ const arrContacts = [
         date:'01/06/2023',
         lastMsg:"provavelmente se metendo em brigas",
         conversations:[
-            ["Sabe onde o vegeta foi ?"],
-            ["provavelmente se metendo em brigas"]
+            {owner:false, msg:"Sabe onde o vegeta foi ?"},
+            {owner:true, msg:"provavelmente se metendo em brigas"},
         ]
     },
     {
@@ -69,8 +72,9 @@ const arrContacts = [
         date:'quinta-feira',
         lastMsg:"Acho que no final de dessa semana.",
         conversations:[
-            ["Opa", "Quandp iremos fazer aquele treino de boxe ?"],
-            ["Acho que no final de dessa semana."]
+            {owner:false, msg:"Opa"},
+            {owner:false, msg:"Quandp iremos fazer aquele treino de boxe ?"},
+            {owner:true, msg:"Acho que no final dessa semana."},
         ]
     },
     {
@@ -79,8 +83,10 @@ const arrContacts = [
         date:'segunda-feira',
         lastMsg:"Acho que na academia de heróis**",
         conversations:[
-            ["Hello", "Sabe onde foi o jovem Izuku Midoriya"],
-            ["Acho que na academia de heres", "Acho que na academia de heróis**"]
+            {owner:false, msg:"Hello"},
+            {owner:false, msg:"Sabe onde foi o jovem Izuku Midoriya"},
+            {owner:true, msg:"Acho que na academia de heres"},
+            {owner:true, msg:"Acho que na academia de heróis**"},
         ]
     }
 ]
@@ -96,8 +102,6 @@ function switchChatOnClick(index){
     const imgFriendBar = document.querySelector("#friend-bar-img")
     const name = arrContacts[index].name;
     const img = arrContacts[index].img;
-    const yourConversations = arrContacts[index].conversations[1]
-    const friendConversations = arrContacts[index].conversations[0]
     friendName.innerHTML = name
     imgFriendBar.src = img
 
@@ -105,26 +109,25 @@ function switchChatOnClick(index){
 
     conversationsList.innerHTML = "";
     
-    for(let friend=0; friend<friendConversations.length; friend++){            
-        conversationsList.innerHTML += `
-            <li class="another-conversation-container">
-                <div class="another-conversation">
-                    <p class="another-msg msg">${friendConversations[friend]}</p>                          
-                </div>                                        
-            </li>
-        `            
-    }
-    for(let you=0; you<yourConversations.length; you++){
-        yourConversations[you]
-        conversationsList.innerHTML += `
-            <li class="your-message-container">
-                <div class="your-conversation">                        
-                    <p class="your-msg msg">${yourConversations[you]}<br><span class="hour">19:14</span> </p>
-                </div>
-            </li>
-        `        
-    }
-    
+    for(let j=0;j<arrContacts[index].conversations.length;j++){
+        if(arrContacts[index].conversations[j].owner == true){
+            conversationsList.innerHTML += `
+                <li class="your-message-container">
+                    <div class="your-conversation">                        
+                        <p class="your-msg msg">${arrContacts[index].conversations[j].msg}<br><span class="hour">19:14</span></p>
+                    </div>
+                </li>
+            `            
+        }else{
+            conversationsList.innerHTML += `
+                <li class="another-conversation-container">
+                    <div class="another-conversation">
+                        <p class="another-msg msg">${arrContacts[index].conversations[j].msg}<br><span class="hour">19:14</span></p> 
+                    </div>                                        
+                </li>            
+            `
+        }
+    }            
 }
 
 
@@ -176,7 +179,6 @@ for(let i=0; i<arrContacts.length;i++){
     contInformation.append(divContInfoBottom)
 
     contactList.append(newContact)
-    
 }
 const contacts    = document.querySelectorAll(".contact")
 
